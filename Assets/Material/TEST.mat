@@ -8,11 +8,15 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TEST
-  m_Shader: {fileID: 210, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: b7839dad95683814aa64166edc107ae2, type: 3}
   m_ValidKeywords:
-  - _ALPHABLEND_ON
+  - _EMISSION
   - _FADING_ON
+  - _SOFTPARTICLES_ON
+  - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
+  - _ALPHABLEND_ON
+  - _FLIPBOOKBLENDING_OFF
   - _SHARPRIMLIGHT_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -22,9 +26,15 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - GRABPASS
+  - DepthOnly
+  - SHADOWCASTER
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -111,13 +121,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
     - _Amount: 0
+    - _Blend: 0
     - _BlendOp: 0
     - _BumpScale: 1
     - _CameraFadingEnabled: 0
     - _CameraFarFadeDistance: 7.49
     - _CameraNearFadeDistance: 1.39
     - _ColorMask: 15
+    - _ColorMode: 0
     - _Contrast: 0.5
     - _Cull: 2
     - _Cutoff: 0.68
@@ -134,6 +147,7 @@ Material:
     - _EmissionFresnelBias: 9.75
     - _EmissionFresnelPower: 2.16
     - _EmissionFresnelScale: 3.81
+    - _FlipbookBlending: 0
     - _FlipbookMode: 0
     - _Framerate: 5
     - _GlossMapScale: 1
@@ -156,6 +170,8 @@ Material:
     - _OutlineAlpha: 0.339
     - _OutlineWidth: 2.38
     - _Parallax: 0.02
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _RimAmount: 0.256
     - _RimOffset: 0.24
     - _RimPower: 0.587
@@ -168,6 +184,7 @@ Material:
     - _SecondaryTextureSpeedFactor: 0
     - _SecondaryTextureStrength: 0
     - _SharpRimLight: 1
+    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 1
     - _SoftParticlesFarFadeDistance: 135.21
@@ -180,6 +197,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _Stochastic: 0
+    - _Surface: 1
     - _TimeQuantize: 5
     - _UVSec: 0
     - _UseEmissionFresnel: 0
@@ -196,9 +214,11 @@ Material:
     - _ZWrite: 0
     - __dirty: 1
     m_Colors:
+    - _BaseColor: {r: 0.1132075, g: 0, b: 0.0019217972, a: 1}
+    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _BottomColor: {r: 1, g: 0.6, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.11320752, g: 0, b: 0.0019217972, a: 1}
+    - _Color: {r: 0.11320745, g: 0, b: 0.0019217972, a: 1}
     - _DiffuseColor: {r: 0.16862746, g: 0.007843138, b: 0.007843138, a: 1}
     - _EmissionColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
     - _Hue: {r: 0.16862746, g: 0.007843138, b: 0.007843138, a: 1}
@@ -212,3 +232,16 @@ Material:
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _TopColor: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &5209170876895554749
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 5
