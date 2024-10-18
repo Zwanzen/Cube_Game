@@ -185,6 +185,8 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private Transform mainCamera;
 
+    public bool Paused;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -197,7 +199,10 @@ public class CharacterController : MonoBehaviour
         ParticleHandler();
         ShieldHandler();
 
-        Turning();
+        if (!Paused)
+        {
+            Turning();
+        }
 
         GrappleHandler();
         Dash();
@@ -205,7 +210,10 @@ public class CharacterController : MonoBehaviour
 
         if(!isGrappeling)
         {
-            SwordHandler();
+            if (!Paused)
+            {
+                SwordHandler();
+            }
         }
         else
         {
@@ -223,7 +231,7 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isSwinging)
+        if (!isSwinging && !Paused)
         {
             Walking();
         }

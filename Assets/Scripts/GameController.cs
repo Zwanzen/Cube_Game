@@ -6,12 +6,15 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using MoreMountains.Feedbacks;
+using UnityEngine.Rendering;
 
 public class GameController : MonoBehaviour
 {
     [Header("Player Stuff")]
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private CharacterController playerController;
     [SerializeField]
     private CameraHandler cameraFollower;
     [SerializeField]
@@ -32,6 +35,14 @@ public class GameController : MonoBehaviour
     private GameObject victoryCamera;
     [SerializeField]
     private TextMeshProUGUI finalTime;
+
+    public Volume playingVolume;
+    private VolumeProfile playingProfile;
+    public VolumeProfile pauseVolume;
+
+    public GameObject pauseUI;
+    public MMF_Player pauseUIShow;
+    public MMF_Player click;
 
     [Space(20)]
     [SerializeField]
@@ -63,7 +74,7 @@ public class GameController : MonoBehaviour
     bool hasMoved;
     private Vector2 startPos;
 
-    private void Start()
+    private void Awake()
     {
         // Initialize the variables
         gameTime = 0f;
@@ -73,6 +84,8 @@ public class GameController : MonoBehaviour
         f_color = crystalFeedback.GetFeedbackOfType<MMF_TMPColor>();
         f_audio = crystalFeedback.GetComponent<AudioSource>();
         startPos = new Vector2(player.transform.position.x, player.transform.position.z);
+
+        playingProfile = playingVolume.profile;
     }
 
     private void Update()
@@ -97,7 +110,19 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            pauseUIShow.PlayFeedbacks();
+            playingVolume.profile = pauseVolume;
+
+            // turn off all UI
+            foreach (var x in uiToTurnOff)
+            {
+                x.SetActive(false);
+            }
+
+            Cursor.lockState = CursorLockMode.None;
+            playerController.Paused = true;
+            cameraFollower.Paused = true;
+            click.PlayFeedbacks();
         }
 
         var pos = new Vector2(player.transform.position.x, player.transform.position.z);
@@ -106,6 +131,26 @@ public class GameController : MonoBehaviour
         {
             hasMoved = true;
         }
+    }
+
+    public void ResumeGame()
+    {
+        playingVolume.profile = playingProfile;
+
+        // turn on all UI
+        foreach (var x in uiToTurnOff)
+        {
+            x.SetActive(true);
+        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        playerController.Paused = false;
+        cameraFollower.Paused = false;
+    }
+
+    public void QuitToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void HoldForRestart()
@@ -134,7 +179,7 @@ public class GameController : MonoBehaviour
         finalTime.text = timerText.text;
     }
 
-    private void RestartGame()
+    public void RestartGame()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentSceneIndex);

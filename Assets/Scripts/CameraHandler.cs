@@ -19,6 +19,8 @@ public class CameraHandler : MonoBehaviour
     public float lookAngle;
     private float pivotAngle;
 
+    public bool Paused;
+
     [HideInInspector]
     public bool dead;
 
@@ -27,7 +29,10 @@ public class CameraHandler : MonoBehaviour
         if (!dead)
         {
             FollowPlayer();
-            HandleRotation();
+            if (!Paused)
+            {
+                HandleRotation();
+            }
         }
 
     }

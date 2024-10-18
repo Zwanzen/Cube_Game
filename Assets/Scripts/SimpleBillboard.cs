@@ -7,7 +7,7 @@ public class SimpleBillboard : MonoBehaviour
     Camera mainCamera;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         mainCamera = Camera.main;
     }
