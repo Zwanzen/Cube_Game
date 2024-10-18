@@ -341,7 +341,7 @@ public class EnemyRanged : MonoBehaviour
             return;
         }
 
-        Vector3 rbVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 rbVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         Vector3 moveDir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         moveDir.y = 0f;
@@ -504,7 +504,7 @@ public class EnemyRanged : MonoBehaviour
             GetComponent<BoxCollider>().enabled = false;
             meshes.SetActive(false);
             rb.isKinematic = true;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
         }
         StartCoroutine(GotHitCooldown());
     }

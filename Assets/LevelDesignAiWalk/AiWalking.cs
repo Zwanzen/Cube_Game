@@ -184,7 +184,7 @@ public class AiWalking : MonoBehaviour
             return;
         }
 
-        Vector3 rbVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 rbVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         Vector3 moveDir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         moveDir.y = 0f;

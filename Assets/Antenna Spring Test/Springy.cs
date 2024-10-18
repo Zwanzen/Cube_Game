@@ -35,7 +35,7 @@ public class Springy : MonoBehaviour
         SpringRB.AddRelativeForce((LocalDistance) * springForce);//Apply Spring
 
         //Calculate the local velocity of the springObj point
-        LocalVelocity = (springObj.InverseTransformDirection(SpringRB.velocity));
+        LocalVelocity = (springObj.InverseTransformDirection(SpringRB.linearVelocity));
         SpringRB.AddRelativeForce((-LocalVelocity) * drag);//Apply drag
 
         //Aim the visible geo at the spring target

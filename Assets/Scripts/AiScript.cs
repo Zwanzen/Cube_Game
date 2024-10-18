@@ -25,7 +25,7 @@ public class AiScript : MonoBehaviour
         Vector3 moveDir = targetTransform.position - transform.position;
         //moveDir.y = 0;
 
-        Vector3 rbVel = rb.velocity;
+        Vector3 rbVel = rb.linearVelocity;
 
 
         if (moveDir.normalized.magnitude <= 1 && Vector3.Dot(moveDir, rbVel) > 0.2f)

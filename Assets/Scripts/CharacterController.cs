@@ -242,7 +242,7 @@ public class CharacterController : MonoBehaviour
         //get dir
         Vector3 moveDir = MoveVector();
         //get vel
-        Vector3 rbVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        Vector3 rbVel = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
         //orientate based on camera
         //moveDir = Quaternion.AngleAxis(cameraHolder.rotation.eulerAngles.y, Vector3.up) * moveDir;
@@ -422,7 +422,7 @@ public class CharacterController : MonoBehaviour
         {
             jumping = true;
             canJump = false;
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
 
             if (isWalljump)
             {
@@ -546,7 +546,7 @@ public class CharacterController : MonoBehaviour
             StartCoroutine(landedDelay());
         }
 
-        if(rb.velocity.y < -1f && !landed && IsGrounded())
+        if(rb.linearVelocity.y < -1f && !landed && IsGrounded())
         {
             landFeedback.PlayFeedbacks();
             landed = true;
@@ -842,7 +842,7 @@ public class CharacterController : MonoBehaviour
 
         var airSound = transform.AddComponent<AudioSource>();
 
-            float currentSpeed = rb.velocity.magnitude;
+            float currentSpeed = rb.linearVelocity.magnitude;
             float normalizedSpeed = Mathf.Clamp01((currentSpeed - minSpeed) / (maxSpeed - minSpeed));
             float volume = Mathf.Lerp(minVolume, maxVolume, normalizedSpeed);
 
@@ -910,13 +910,13 @@ public class CharacterController : MonoBehaviour
     {
         if (rb != null && isGizmo)
         {
-            Vector3 rel = rb.velocity;
+            Vector3 rel = rb.linearVelocity;
 
             Gizmos.color = Color.yellow;
             Gizmos.DrawLine(transform.position, transform.position + dir * dirVel * gizmoStreanght);
 
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + new Vector3(rb.velocity.x, 0, rb.velocity.z) * gizmoStreanght);
+            Gizmos.DrawLine(transform.position, transform.position + new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z) * gizmoStreanght);
    
         }
 

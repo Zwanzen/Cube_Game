@@ -72,7 +72,7 @@ public class Missile : MonoBehaviour
     {
         float t = elapsedTime / duration;
         var newSpeed = Mathf.Lerp(_speed, maxSpeed, t);
-        _rb.velocity = transform.forward * newSpeed;
+        _rb.linearVelocity = transform.forward * newSpeed;
 
         if (_target != null)
         {
@@ -90,7 +90,7 @@ public class Missile : MonoBehaviour
     {
         var predictionTime = Mathf.Lerp(0, _maxTimePrediction, leadTimePercentage);
 
-        _standardPrediction = tarRB.position + tarRB.velocity * predictionTime;
+        _standardPrediction = tarRB.position + tarRB.linearVelocity * predictionTime;
     }
 
     private void AddDeviation(float leadTimePercentage)

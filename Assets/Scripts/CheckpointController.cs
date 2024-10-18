@@ -17,7 +17,7 @@ public class CheckpointController : MonoBehaviour
     {
         if (other.tag == "Player" || other.tag == "Sword")
         {
-            player.rb.velocity = Vector3.zero;
+            player.rb.linearVelocity = Vector3.zero;
             other.transform.position = respawnPoint.position;
             other.transform.rotation = respawnPoint.rotation;
             cameraHandler.lookAngle = respawnPoint.eulerAngles.y;
